@@ -2,6 +2,10 @@
 
 React Hook for addressing the issue on mobile devices where `100vh` doesn't mean what you would expect. This is very noticeable on iOS Safari where we have the address and toolbar on top of the `100vh` which generates an undesirable vertical scrollbar.
 
+</a><a href="https://bundlephobia.com/result?p=@framini/use-vh@latest" target="\_parent">
+  <img alt="" src="https://badgen.net/bundlephobia/minzip/@framini/use-vh@latest" />
+</a>
+
 ## Install
 
 With Yarn
