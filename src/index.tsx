@@ -2,6 +2,8 @@ import React, { Dispatch, SetStateAction } from 'react';
 
 const isClient = typeof window === 'object';
 
+const useLayoutEffect = typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
+
 const useRafState = <S,>(
   initialState: S | (() => S)
 ): [S, Dispatch<SetStateAction<S>>] => {
@@ -26,9 +28,11 @@ const useRafState = <S,>(
 };
 
 const useWindowInnerHeight = () => {
-  const [state, setState] = useRafState<number>(
-    isClient ? window.innerHeight : 0
-  );
+  const [state, setState] = useRafState<number>(0);
+
+  useLayoutEffect(() => {
+    setState(window.innerHeight);
+  }, [])
 
   React.useEffect((): (() => void) | void => {
     if (isClient) {
