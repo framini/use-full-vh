@@ -2,7 +2,8 @@ import React, { Dispatch, SetStateAction } from 'react';
 
 const isClient = typeof window === 'object';
 
-const useLayoutEffect = typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
+const useLayoutEffect =
+  typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
 
 const useRafState = <S,>(
   initialState: S | (() => S)
@@ -32,7 +33,7 @@ const useWindowInnerHeight = () => {
 
   useLayoutEffect(() => {
     setState(window.innerHeight);
-  }, [])
+  }, [setState]);
 
   React.useEffect((): (() => void) | void => {
     if (isClient) {
@@ -46,7 +47,7 @@ const useWindowInnerHeight = () => {
         window.removeEventListener('resize', handler);
       };
     }
-  }, []);
+  }, [setState]);
 
   return state;
 };
@@ -56,5 +57,5 @@ export const useVh = (value = 100) => {
 
   return React.useMemo(() => {
     return (windowInnerHeight * value) / 100;
-  }, [windowInnerHeight]);
+  }, [windowInnerHeight, value]);
 };
